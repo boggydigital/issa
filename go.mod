@@ -1,3 +1,3 @@
-module github.com/boggydigitl/issa
+module github.com/boggydigital/issa
 
 go 1.18
