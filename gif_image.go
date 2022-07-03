@@ -15,12 +15,13 @@ func GIFImage(img image.Image, plt color.Palette, sample int) *gif.GIF {
 	size := img.Bounds().Size()
 	gifWidth, gifHeight := size.X/sample, size.Y/sample
 	gifRect := image.Rect(0, 0, gifWidth, gifHeight)
+	offset := sample / 2
 
 	gifImage := image.NewPaletted(gifRect, plt)
 
 	for y := 0; y < gifHeight; y++ {
 		for x := 0; x < gifWidth; x++ {
-			pltc := uint8(plt.Index(img.At(x*sample, y*sample)))
+			pltc := uint8(plt.Index(img.At(x*sample+offset, y*sample+offset)))
 			gifImage.SetColorIndex(x, y, pltc)
 		}
 	}
