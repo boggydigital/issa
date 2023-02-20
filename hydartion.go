@@ -14,7 +14,7 @@ const (
 	GIF89aBase64Header   = "R0lGODlh" // GIF89a
 )
 
-//logicalScreenImageDescriptors provides 7 byte logical screen descriptor,
+// logicalScreenImageDescriptors provides 7 byte logical screen descriptor,
 // and 10 bytes image descriptor according to the https://www.w3.org/Graphics/GIF/spec-gif89a.txt
 func logicalScreenImageDescriptors(width, height int) []byte {
 	return []byte{
@@ -40,18 +40,18 @@ func logicalScreenImageDescriptors(width, height int) []byte {
 	}
 }
 
-//formatDescriptorsStdPalette is a reproducible portion of base64 encoded GIF image
-//with a standard palette that contains GIF89a format header, logical screen
-//descriptor, image descriptor, and standard palette
-func formatDescriptorsStdPalette(width, height int) string {
+// StdPalettePrefix is a reproducible portion of base64 encoded GIF image
+// with a standard palette that contains GIF89a format header, logical screen
+// descriptor, image descriptor, and standard palette
+func StdPalettePrefix(width, height int) string {
 	return GIF89aBase64Header +
 		base64.RawStdEncoding.EncodeToString(
 			logicalScreenImageDescriptors(width, height)) +
 		StdPaletteBase64Content
 }
 
-//Dehydrate encodes a GIF image (base64 encoding), removes a reproducible portion (about 1Kb of content) and
-//prefixes the result with image width and height (separated with base64 padding character)
+// Dehydrate encodes a GIF image (base64 encoding), removes a reproducible portion (about 1Kb of content) and
+// prefixes the result with image width and height (separated with base64 padding character)
 func Dehydrate(gifImage *gif.GIF) (string, error) {
 
 	if len(gifImage.Image) < 1 {
@@ -70,11 +70,14 @@ func Dehydrate(gifImage *gif.GIF) (string, error) {
 
 	b64s := base64.RawStdEncoding.EncodeToString(buf.Bytes())
 
-	return fmt.Sprintf("%d%c%d%c", size.X, base64.StdPadding, size.Y, base64.StdPadding) +
-		strings.TrimPrefix(b64s, formatDescriptorsStdPalette(size.X, size.Y)), nil
+	return DehydratedSizePrefix(size.X, size.Y) + strings.TrimPrefix(b64s, StdPalettePrefix(size.X, size.Y)), nil
 }
 
-//Hydrate takes dehydrated string, restores it and prefixes with base64 GIF image MIME type
+func DehydratedSizePrefix(x, y int) string {
+	return fmt.Sprintf("%d%c%d%c", x, base64.StdPadding, y, base64.StdPadding)
+}
+
+// Hydrate takes dehydrated string, restores it and prefixes with base64 GIF image MIME type
 func Hydrate(dehydrated string) string {
 	if dehydrated == "" {
 		return ""
@@ -88,7 +91,7 @@ func Hydrate(dehydrated string) string {
 	if width, err := strconv.Atoi(parts[0]); err == nil {
 		if height, err := strconv.Atoi(parts[1]); err == nil {
 			return MIMETypeBase64Prefix +
-				formatDescriptorsStdPalette(width, height) +
+				StdPalettePrefix(width, height) +
 				parts[2]
 		}
 	}
