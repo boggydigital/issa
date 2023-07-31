@@ -8,11 +8,13 @@ import (
 
 func main() {
 
+	//below is a sample of using FindOptimalSampling on your images data set
+
 	ni := 6
 	images := make([]string, ni)
 
 	for i := 0; i < ni; i++ {
-		images[i] = fmt.Sprintf("/Users/boggydigital/Downloads/image-%d.jpeg", i+1)
+		images[i] = fmt.Sprintf("image-%d.jpeg", i+1)
 	}
 
 	samples, tlen, err := issa.FindOptimalSampling(images)

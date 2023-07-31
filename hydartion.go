@@ -14,13 +14,9 @@ const (
 	GIF89aBase64Header   = "R0lGODlh" // GIF89a
 )
 
-func b64s(bts []byte) string {
-	return base64.RawURLEncoding.EncodeToString(bts)
-}
-
-// LogicalScreenImageDescriptors provides 7 byte logical screen descriptor,
+// logicalScreenImageDescriptors provides 7 byte logical screen descriptor,
 // and 10 bytes image descriptor according to the https://www.w3.org/Graphics/GIF/spec-gif89a.txt
-func LogicalScreenImageDescriptors(width, height int) []byte {
+func logicalScreenImageDescriptors(width, height int) []byte {
 	return []byte{
 		// Logical Screen Descriptor
 		uint8(width % 256),  // Logical Screen Width
@@ -49,7 +45,8 @@ func LogicalScreenImageDescriptors(width, height int) []byte {
 // descriptor, image descriptor, and standard palette
 func StdPalettePrefix(width, height int) string {
 	return GIF89aBase64Header +
-		b64s(LogicalScreenImageDescriptors(width, height)) +
+		base64.RawStdEncoding.EncodeToString(
+			logicalScreenImageDescriptors(width, height)) +
 		StdPaletteBase64Content
 }
 
@@ -71,10 +68,9 @@ func Dehydrate(gifImage *gif.GIF) (string, error) {
 		return "", err
 	}
 
-	encoded := b64s(buf.Bytes())
-	prefix := StdPalettePrefix(size.X, size.Y)
+	b64s := base64.RawStdEncoding.EncodeToString(buf.Bytes())
 
-	return DehydratedSizePrefix(size.X, size.Y) + strings.TrimPrefix(encoded, prefix), nil
+	return DehydratedSizePrefix(size.X, size.Y) + strings.TrimPrefix(b64s, StdPalettePrefix(size.X, size.Y)), nil
 }
 
 func DehydratedSizePrefix(x, y int) string {

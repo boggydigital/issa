@@ -8,8 +8,8 @@ import (
 
 const DefaultSampling = 16
 
-//GIFImage converts a given image to a standard palette (see StdPalette) image,
-//that is sampled every `sample` pixels (e.g. every 16 pixels by default)
+// GIFImage converts a given image to a standard palette (see StdPalette) image,
+// that is sampled every `sample` pixels (e.g. every 16 pixels by default)
 func GIFImage(img image.Image, plt color.Palette, sample int) *gif.GIF {
 
 	size := img.Bounds().Size()
