@@ -19,9 +19,8 @@ const StdPaletteBase64Content = "qKioqKlQqKn4qKqgqKtIqKvwqVCoqVFQqVH4qVKgqVNIqVP
 	"8fir8flT8fn78fqj8ftL8fvz8qCr8qFT8qH78qKj8qNL8qPz80ir80lT80n780qj" +
 	"80tL80vz8/Cr8/FT8/H78/Kj8/NL8/PwAAAAAAP8A/wAA////AAD/AP///wD///9" +
 	"sbGxsbJZsbMBslmxslpZslsBswGxswJZswMCWbGyWbJaWbMCWlmyWlpaWlsCWwGy" +
-	"WwJaWwMDAbGzAbJbAbMDAlmzAlpbAlsDAwGzAwJbAwMAAAAAAAAAAAAAAAAAAAAA"
-
-//"I/w"
+	"WwJaWwMDAbGzAbJbAbMDAlmzAlpbAlsDAwGzAwJbAwMAAAAAAAAAAAAAAAAAAAAA" +
+	"I/w"
 
 func StdPalette() color.Palette {
 	plt := color.Palette{}

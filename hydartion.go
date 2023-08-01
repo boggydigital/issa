@@ -90,9 +90,17 @@ func Hydrate(dehydrated string) string {
 
 	if width, err := strconv.Atoi(parts[0]); err == nil {
 		if height, err := strconv.Atoi(parts[1]); err == nil {
-			return MIMETypeBase64Prefix +
-				StdPalettePrefix(width, height) +
-				parts[2]
+
+			hydratedImage := ""
+
+			if strings.HasPrefix(parts[2], GIF89aBase64Header) {
+				hydratedImage = MIMETypeBase64Prefix + parts[2]
+			} else {
+				hydratedImage = MIMETypeBase64Prefix + StdPalettePrefix(width, height) +
+					parts[2]
+			}
+
+			return hydratedImage
 		}
 	}
 
