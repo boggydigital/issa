@@ -22,7 +22,7 @@ Typical workflow of an app using issa has the following steps:
 - Convert source image into paletted GIF
 - Dehydrate paletted GIF
 
-NOTE: example below omits error handling for brevity
+NOTE: example below oversimplifies error handling for brevity
 
 ```go
 package main
@@ -36,17 +36,20 @@ import (
 )
 
 func main() {
-	fi, _ := os.Open("sample.jpg")
-    defer fi.Close()
-	
-	jpegImage, _, _ := image.Decode(fi)
+	fi, err := os.Open("image.jpeg")
+	if err != nil {panic(err)}
+	defer fi.Close()
+
+	jpegImage, _, err := image.Decode(fi)
+	if err != nil {panic(err)}
 
 	gifImage := issa.GIFImage(
 		jpegImage,
 		issa.StdPalette(),
 		issa.DefaultSampling)
 
-	dhi, _ := issa.Dehydrate(gifImage)
+	dhi, err := issa.Dehydrate(gifImage)
+	if err != nil {panic(err)}
 
 	fmt.Printf(dhi)
 }
