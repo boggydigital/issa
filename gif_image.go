@@ -7,9 +7,9 @@ import (
 	"image/gif"
 )
 
-const DefaultDownSampling = 16
+const DefaultSampling = 16
 
-// GIFImage converts a given image to a standard palette (see StdPalette) image,
+// GIFImage converts a given image to a standard palette (see ColorPalette) image,
 // that is down-sampled (e.g. by a factor of 16x by default)
 func GIFImage(img image.Image, plt color.Palette, sample int) *gif.GIF {
 

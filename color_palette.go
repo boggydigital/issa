@@ -4,7 +4,7 @@ import (
 	"image/color"
 )
 
-const StdPaletteBase64Content = "qKioqKlQqKn4qKqgqKtIqKvwqVCoqVFQqVH4qVKgqVNIqVPwqfioqflQqfn4qfqg" +
+const ColorPaletteBase64Content = "qKioqKlQqKn4qKqgqKtIqKvwqVCoqVFQqVH4qVKgqVNIqVPwqfioqflQqfn4qfqg" +
 	"qftIqfvwqqCoqqFQqqH4qqKgqqNIqqPwq0ioq0lQq0n4q0qgq0tIq0vwq/Coq/FQ" +
 	"q/H4q/Kgq/NIq/PxUKipUKlRUKn5UKqhUKtJUKvxUVCpUVFRUVH5UVKhUVNJUVPx" +
 	"UfipUflRUfn5UfqhUftJUfvxUqCpUqFRUqH5UqKhUqNJUqPxU0ipU0lRU0n5U0qh" +
@@ -21,7 +21,7 @@ const StdPaletteBase64Content = "qKioqKlQqKn4qKqgqKtIqKvwqVCoqVFQqVH4qVKgqVNIqVP
 	"sbGxsbJZsbMBslmxslpZslsBswGxswJZswMCWbGyWbJaWbMCWlmyWlpaWlsCWwGy" +
 	"WwJaWwMDAbGzAbJbAbMDAlmzAlpbAlsDAwGzAwJbAwMAAAAAAAAAAAAAAAAAAAAA"
 
-func StdPalette() color.Palette {
+func ColorPalette() color.Palette {
 	plt := color.Palette{}
 
 	n := uint8(6)

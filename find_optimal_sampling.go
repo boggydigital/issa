@@ -35,9 +35,9 @@ func FindOptimalSampling(imageSources []string) (int, int, error) {
 		totalLen = 0
 		for _, img := range images {
 
-			ig := GIFImage(img, StdPalette(), s)
+			ig := GIFImage(img, ColorPalette(), s)
 
-			dhi, err := Dehydrate(ig)
+			dhi, err := DehydrateColor(ig)
 			if err != nil {
 				return minSample, 0, err
 			}

@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
+	findOptimalSettings()
+}
 
+func findOptimalSettings() {
 	//below is a sample of using FindOptimalSampling on your images data set
 
 	ni := 6

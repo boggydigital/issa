@@ -1,5 +1,5 @@
 module github.com/boggydigital/issa
 
-go 1.20
+go 1.23.0
 
-require golang.org/x/image v0.11.0 // indirect
+require golang.org/x/image v0.19.0
