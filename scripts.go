@@ -2,5 +2,5 @@ package issa
 
 import _ "embed"
 
-//go:embed "script/color_hydrate.js"
-var ColorHydrateScript []byte
+//go:embed "script/hydrate_color.js"
+var HydrateColorScript []byte
