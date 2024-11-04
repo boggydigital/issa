@@ -40,6 +40,9 @@ func RepColor(image *gif.GIF) color.Color {
 }
 
 func ColorHex(c color.Color) string {
+	if c == nil {
+		return "#000000"
+	}
 	bts := make([]byte, 3)
 	r, g, b, _ := c.RGBA()
 	bts[0], bts[1], bts[2] = byte(r>>8), byte(g>>8), byte(b>>8)
