@@ -10,6 +10,10 @@ const minLuma = 192 << 8
 
 func RepColor(image *gif.GIF) color.Color {
 
+	if image == nil {
+		return color.Black
+	}
+
 	colors := make(map[color.Color]int)
 
 	for _, frame := range image.Image {
