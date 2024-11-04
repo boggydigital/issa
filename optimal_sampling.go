@@ -8,7 +8,7 @@ import (
 
 const maxSample = 64
 
-func FindOptimalSampling(imageSources []string) (int, int, error) {
+func OptimalSampling(imageSources []string) (int, int, error) {
 
 	images := make([]image.Image, len(imageSources))
 	for i, imgSrc := range imageSources {
