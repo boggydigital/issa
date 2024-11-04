@@ -36,8 +36,8 @@ func RepColor(image *gif.GIF) color.Color {
 }
 
 func ColorHex(c color.Color) string {
-	bts := make([]byte, 0, 3)
+	bts := make([]byte, 3)
 	r, g, b, _ := c.RGBA()
-	bts = append(bts, byte(r>>8), byte(g>>8), byte(b>>8))
+	bts[0], bts[1], bts[2] = byte(r>>8), byte(g>>8), byte(b>>8)
 	return "#" + hex.EncodeToString(bts)
 }
