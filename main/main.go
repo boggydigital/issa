@@ -45,7 +45,7 @@ func findDominantColor() {
 
 	start := time.Now()
 
-	ni := 18
+	ni := 11
 
 	for i := range ni {
 		imagePath := fmt.Sprintf("image-%d.jpeg", i+1)

@@ -6,7 +6,8 @@ import (
 	"image/gif"
 )
 
-const minLuma = 192 << 8
+const min = 128 << 8
+const max = 384 << 8
 
 func RepColor(image *gif.GIF) color.Color {
 
@@ -19,7 +20,8 @@ func RepColor(image *gif.GIF) color.Color {
 	for _, frame := range image.Image {
 		for _, p := range frame.Pix {
 			c := frame.Palette[p]
-			if r, g, b, _ := c.RGBA(); (r + g + b) < minLuma {
+
+			if r, g, b, _ := c.RGBA(); (r+g+b) < min || (r+g+b) > max {
 				continue
 			}
 			colors[c] += 1
