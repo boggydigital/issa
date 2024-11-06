@@ -6,8 +6,8 @@ import (
 	"image/gif"
 )
 
-const min = 128 << 8
-const max = 384 << 8
+const min = 192 << 8 // 256 - 64
+const max = 704 << 8 // 256 * 3 - 64
 
 func RepColor(image *gif.GIF) color.Color {
 
