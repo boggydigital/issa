@@ -38,6 +38,15 @@ func RepColor(image *gif.GIF) color.Color {
 		}
 	}
 
+	if maxColor == nil {
+		maxColor = color.RGBA{
+			R: 128,
+			G: 128,
+			B: 128,
+			A: 255,
+		}
+	}
+
 	return maxColor
 }
 
