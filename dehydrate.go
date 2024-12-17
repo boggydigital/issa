@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"encoding/base64"
 	"fmt"
+	"image"
 	"image/gif"
+	"os"
 	"strings"
 )
 
@@ -41,4 +43,30 @@ func DehydrateGreyscale(gifImage *gif.GIF) (string, error) {
 
 func DehydratedSizePrefix(x, y int) string {
 	return fmt.Sprintf("%d%c%d%c", x, base64.StdPadding, y, base64.StdPadding)
+}
+
+func DehydrateImageRepColor(absImagePath string) (string, string, error) {
+	dhi, rc := "", ""
+
+	fi, err := os.Open(absImagePath)
+	if err != nil {
+		return dhi, rc, err
+	}
+	defer fi.Close()
+
+	img, _, err := image.Decode(fi)
+	if err != nil {
+		return dhi, rc, err
+	}
+
+	gif := GIFImage(img, ColorPalette(), DefaultSampling)
+
+	dhi, err = DehydrateColor(gif)
+	if err != nil {
+		return dhi, rc, err
+	}
+
+	repColor := RepColor(gif)
+
+	return dhi, ColorHex(repColor), nil
 }
