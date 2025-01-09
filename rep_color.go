@@ -9,6 +9,8 @@ import (
 const min = 192 << 8 // 256 - 64
 const max = 704 << 8 // 256 * 3 - 64
 
+const NeutralRepColor = "#808080"
+
 func RepColor(image *gif.GIF) color.Color {
 
 	if image == nil {
@@ -52,7 +54,7 @@ func RepColor(image *gif.GIF) color.Color {
 
 func ColorHex(c color.Color) string {
 	if c == nil {
-		return "#000000"
+		return NeutralRepColor
 	}
 	bts := make([]byte, 3)
 	r, g, b, _ := c.RGBA()
